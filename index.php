@@ -1,6 +1,12 @@
 <?php 
 
-$PDO = new PDO('pgsql:host=db;dbname=docker_test', 'pasha', '123');
-echo "All right!";
+$PDO = new PDO('mysql:host=mysql;dbname=docker_test', 'root', '123');
 
+class Currency {
+	private $isoCode;
+}
 
+Class Money {
+	private $amount;
+	private $currency;
+}

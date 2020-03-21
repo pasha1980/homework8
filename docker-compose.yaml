@@ -6,22 +6,20 @@ services:
       - 8080:80
     restart: always
     volumes:
-      - .:/var/www/html
+     - .:/var/www/html
     links:
-      - db
-  db:
-    image: postgres:12.1
+     - mysql
+  mysql:
+    image: mysql:5.7.28
     ports: 
       - 33060:3306
-    restart: always
     environment:
-      - POSTGRES_PASSWORD=123
-      - POSTGRES_USER=pasha
-      - POSTGRES_DB=docker_test
-  adminer:
-    image: adminer:4.7.5
+      - MYSQL_ROOT_PASSWORD=123
+      - MYSQL_DATABASE=docker_test
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:4.9.1
     ports: 
-      - 8081:8080
+      - 8081:80
     restart: always
     environment:
-      - ADMINER_DEFAULT_SERVER=db
+      - PMA_HOST=mysql

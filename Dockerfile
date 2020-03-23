@@ -1,3 +1,6 @@
 FROM php:7.1-apache
 RUN docker-php-ext-install pdo pdo_mysql;
-COPY . /var/www/html/
+#COPY . /var/www/html/
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+COPY php/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini

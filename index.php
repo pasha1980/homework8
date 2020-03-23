@@ -2,12 +2,15 @@
 
 $PDO = new PDO('mysql:host=mysql;dbname=docker_test', 'root', '123');
 
+require_once('isoCodes');
+
 class Currency {
 	
 	private $isoCode;                      //Приватное свойство
 	
 	public function __construct($a) {      //Конструктор класса
-		$a = numfmt_create( 'ru_RU', NumberFormatter::CURRENCY );
+		
+
 		$this->setB($a);
 	}
 	

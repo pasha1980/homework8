@@ -4,9 +4,6 @@
 
 require_once 'my_autoloader/autoload.php';           // Собственный автозагрузчик (упрощённый)
 
-
-$id = 1;
-
 /* Выводит SELECT * FROM <table> WHERE id = :id
  * 1 аргумент - *
  * 2 аргумент - <table>

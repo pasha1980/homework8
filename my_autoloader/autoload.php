@@ -5,10 +5,6 @@
 
 class myAutoloader
 {
-//    public function create_name($class)
-//    {
-//        $path = str_replace('\\', '/', str_replace('App', 'src', $class)) . '.php';
-
     public function register()
     {
         spl_autoload_register(
@@ -17,10 +13,6 @@ class myAutoloader
                 require_once $path;
             }
         );
-
-//    }
-
-
     }
 }
 

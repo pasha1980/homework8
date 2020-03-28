@@ -4,8 +4,15 @@
 
 require_once 'my_autoloader/autoload.php';           // Собственный автозагрузчик (упрощённый)
 
-//require_once 'src/Select.php';
 
-$a = new \App\Select;                                // Для проверки (неправильное 7 дз)
+$id = 1;
 
-\App\Select::FROM('1');
+/* Выводит SELECT * FROM <table> WHERE id = :id
+ * 1 аргумент - *
+ * 2 аргумент - <table>
+ * 3 аргумент - id
+ * ----------------------------------------------------------------------
+ * Работает только с названиями методов, приведённых в примере к домашке
+ */
+
+\App\SQL_select::findByEmailAndByStatus('Name' , "Students", '1' , '3');

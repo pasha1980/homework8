@@ -15,7 +15,7 @@ services:
       - 33060:3306
     environment:
       - MYSQL_ROOT_PASSWORD=123
-      - MYSQL_DATABASE=docker_test
+      - MYSQL_DATABASE=study_php
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:4.9.1
     ports: 

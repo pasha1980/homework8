@@ -1,19 +1,16 @@
 <?php
 
-//require_once 'vendor/autoload.php';                // Автозагрузчик PSR4
+require_once 'my_autoloader/autoload.php';
 
-require_once 'my_autoloader/autoload.php';           // Собственный автозагрузчик (упрощённый)
+$a = new \App\Model\User();
 
-/* Выводит SELECT * FROM <table> WHERE ...
- * 1 аргумент - *
- * 2 аргумент - <table>
- * Остальные аргументы - в зависимости от метода, который вызывается
- * ----------------------------------------------------------------------
- * Например:
- * Метод: findBetweenCreatedAt(*, <table>, $startDate, $endDate);
- * Вернёт - SELECT * FROM <table> WHERE created_at BETWEEN $start_date AND $end_date
- * ----------------------------------------------------------------------
- * !!! Работает только с названиями методов, приведённых в примере к домашке
- */
+$a->create_table();
 
-\App\SQL_select::findByEmailAndByStatus('Name' , "Students", '1' , '3');
+//$a->insert('id, name, email', '1, "timur", "timur@pasha.com"');
+
+//$a->delete('id', 1);
+
+//$a->update(10, 'name', "pasha");
+
+//\App\Model\User::select(10);
+

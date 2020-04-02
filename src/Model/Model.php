@@ -8,11 +8,17 @@ abstract class Model
 {
     abstract static function Table(): string;
 
+    abstract static function ColumnNames(): string;
+
+    abstract function Value(): string;
+
+    protected $id;
+
     public static function select($id):self
     {
         $pdo = new \PDO('mysql:host=mysql;dbname=study_php', 'root', '123');
 
-        $sql = 'SELECT * FROM ' . static::Table() . ' WHERE id = :id' . ';';
+        $sql = 'SELECT * FROM ' . static::Table() . ' WHERE `id` = :id ;';
 
         $stmt = $pdo->prepare($sql);
 
@@ -30,15 +36,15 @@ abstract class Model
 
     }
 
-    public function update($id, $column_name, $value)
+    public function update($column_name, $value)
     {
         $pdo = new \PDO('mysql:host=mysql;dbname=study_php', 'root', '123');
 
-        $sql = 'UPDATE ' . static::Table() . " SET $column_name = '$value' WHERE id = :id;";
+        $sql = 'UPDATE ' . static::Table() . " SET `$column_name` = ' $value ' WHERE id = :id;";
 
         $stmt = $pdo->prepare($sql);
 
-        $stmt->bindValue(':id', $id);
+        $stmt->bindValue(':id', $this->getId());
 
 //        $stmt->bindValue(':val', $value);
 
@@ -47,29 +53,47 @@ abstract class Model
         $stmt->execute();
     }
 
-    public function delete($column_name, $value)
+    public function delete()                                                                                            // done
     {
         $pdo = new \PDO('mysql:host=mysql;dbname=study_php', 'root', '123');
 
-        $sql = 'DELETE FROM ' . static::Table() . " WHERE $column_name = :val";
+        $sql = 'DELETE FROM ' . static::Table() . " WHERE `id` = :val";
 
         $stmt = $pdo->prepare($sql);
 
-        $stmt->bindValue(':val', $value);
+        $stmt->bindValue(':val', $this->getId());
 
         $stmt->execute();
     }
 
-    public function insert($column_name, $value)
+    public function insert()
     {
         $pdo = new \PDO('mysql:host=mysql;dbname=study_php', 'root', '123');
 
-        $sql = 'INSERT INTO ' . static::Table() . "($column_name) VALUES ($value);";
+        $value = $this->getId() . $this->Value();
+
+        $sql = 'INSERT INTO `' . static::Table() . '` ( ' . static::ColumnNames() . ' ) VALUES ( ' . $value . ' );';    //С параметрическим запросом :val отказывается работать
 
         $stmt = $pdo->prepare($sql);
 
 //        $stmt->bindValue(':val', $value);
 
         $stmt->execute();
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
     }
 }

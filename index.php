@@ -2,15 +2,15 @@
 
 require_once 'my_autoloader/autoload.php';
 
-$a = new \App\Model\User();
+$a = new \App\Model\User(1, 'pasha', 'pasha@timur.com');
 
-$a->create_table();
+\App\Model\User::create_table();
 
-//$a->insert('id, name, email', '1, "timur", "timur@pasha.com"');
+//$a->insert();
 
-//$a->delete('id', 1);
+//$a->delete();
 
-//$a->update(10, 'name', "pasha");
+//$a->update('name', "igor");
 
-//\App\Model\User::select(10);
+//\App\Model\User::select(1);
 

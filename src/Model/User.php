@@ -6,32 +6,25 @@ namespace App\Model;
 
 final class User extends Model
 {
-    protected ?string $name;
-
-    protected ?string $email;
-
-
-    public static function create_table()
+    private ?string $name;
+    private ?string $email;
+    public function __construct($id, $name, $email)
+    {
+        $this->setId($id);
+        $this->setName($name);
+        $this->setEmail($email);
+    }
+    public static function createTable()
     {
         $pdo = new \PDO('mysql:host=mysql;dbname=study_php', 'root', '123');
-
-        $sql = 'CREATE TABLE `users` (id int(11), name varchar (255), email varchar (255));';
-
+        $sql = 'CREATE TABLE `study_php`.`users` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `name` VARCHAR(255) NULL , `email` VARCHAR(255) NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB; ';
         $stmt = $pdo->prepare($sql);
-
         $stmt->execute();
     }
-
     public static function Table(): string
     {
         return 'users';
     }
-
-    public static function ColumnNames(): string
-    {
-        return 'id, name, email';
-    }
-
     /**
      * @return string
      */
@@ -39,7 +32,6 @@ final class User extends Model
     {
         return $this->name;
     }
-
     /**
      * @param string $name
      */
@@ -47,7 +39,6 @@ final class User extends Model
     {
         $this->name = $name;
     }
-
     /**
      * @return string
      */
@@ -55,7 +46,6 @@ final class User extends Model
     {
         return $this->email;
     }
-
     /**
      * @param string $email
      */
@@ -63,14 +53,6 @@ final class User extends Model
     {
         $this->email = $email;
     }
-
-    public function __construct($id, $name, $email)
-    {
-        $this->setId($id);
-        $this->setName($name);
-        $this->setEmail($email);
-    }
-
     public function Value(): string
     {
         return ' , "' . $this->getName() . '", "' . $this->getEmail() . '"';
